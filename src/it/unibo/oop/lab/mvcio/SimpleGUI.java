@@ -70,9 +70,9 @@ public final class SimpleGUI {
             public void actionPerformed(final ActionEvent e) {
                 try {
                     controller.saveLine(text.getText());
-                } catch (IOException e) {
-                    JOptionPane.showMessageDialog(frame, e, "Error", JOptionPane.ERROR_MESSAGE);
-                    e.printStackTrace();
+                } catch (IOException e1) {
+                    JOptionPane.showMessageDialog(frame, e1, "Error", JOptionPane.ERROR_MESSAGE);
+                    e1.printStackTrace();
                 }
             }
         });
