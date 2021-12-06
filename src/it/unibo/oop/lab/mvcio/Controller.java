@@ -49,4 +49,15 @@ public class Controller {
         }
     }
 
+    /**
+     * Set the file indicated by {@link path} argument as the current file.
+     * 
+     * @param path
+     *          path of the file
+     * @throws IllegalArgumentException
+     *          if do not exist the entire {@link path} argument
+     */
+    public void setCurrentFile(final String path) {
+        this.setCurrentFile(new File(path));
+    }
 }
