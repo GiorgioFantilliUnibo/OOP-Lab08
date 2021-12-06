@@ -68,6 +68,9 @@ public final class SimpleGUIWithFileChooser {
         northPanel.setLayout(new BorderLayout());
         canvas.add(northPanel, BorderLayout.NORTH);
 
+        final JTextField display = new JTextField();
+        northPanel.add(display, BorderLayout.CENTER);
+
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
