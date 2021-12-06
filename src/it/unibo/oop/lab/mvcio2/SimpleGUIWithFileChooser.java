@@ -22,7 +22,16 @@ import it.unibo.oop.lab.mvcio.Controller;
  */
 public final class SimpleGUIWithFileChooser {
 
-    /* 2) The JTextField should be non modifiable. And, should display the
+    /*
+     * Starting from the application in mvcio:
+     * 
+     * 1) Add a JTextField and a button "Browse..." on the upper part of the
+     * graphical interface.
+     * Suggestion: use a second JPanel with a second BorderLayout, put the panel
+     * in the North of the main panel, put the text field in the center of the
+     * new panel and put the button in the line_end of the new panel.
+     *
+     * 2) The JTextField should be non modifiable. And, should display the
      * current selected file.
      * 
      * 3) On press, the button should open a JFileChooser. The program should
@@ -55,15 +64,6 @@ public final class SimpleGUIWithFileChooser {
         final JTextArea text = new JTextArea();
         canvas.add(text, BorderLayout.CENTER);
 
-        /*
-         * Starting from the application in mvcio:
-         * 
-         * 1) Add a JTextField and a button "Browse..." on the upper part of the
-         * graphical interface.
-         * Suggestion: use a second JPanel with a second BorderLayout, put the panel
-         * in the North of the main panel, put the text field in the center of the
-         * new panel and put the button in the line_end of the new panel.
-         */
         final JPanel northPanel = new JPanel();
         northPanel.setLayout(new BorderLayout());
         canvas.add(northPanel, BorderLayout.NORTH);
