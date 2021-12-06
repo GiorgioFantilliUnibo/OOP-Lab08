@@ -69,4 +69,13 @@ public class Controller {
     public File getCurrentFile() {
         return this.file;
     }
+
+    /**
+     * Return the path of current file.
+     * 
+     * @return the path of current file as {@link String}
+     */
+    public String getCurrentFilePath() {
+        return this.file.getPath();
+    }
 }
