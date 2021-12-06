@@ -42,11 +42,11 @@ public class MiniGUI {
         /*
          * Ex 1.01
          */
-        final JPanel panel1 = new JPanel();
-        panel1.setLayout(new BoxLayout(panel1, BoxLayout.LINE_AXIS));
-        canvas.add(panel1, BorderLayout.CENTER);
+        final JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
+        canvas.add(panel, BorderLayout.CENTER);
         final JButton write = new JButton("Print a random number on text field");
-        panel1.add(write);
+        panel.add(write);
 
         /*
          * Ex 1.02
