@@ -24,6 +24,7 @@ import it.unibo.oop.lab.iogui.BadIOGUI;
 public final class SimpleGUI {
 
     private final JFrame frame = new JFrame();
+    private final Controller controller = new Controller();
 
     /*
      * Once the Controller is done, implement this class in such a way that:
