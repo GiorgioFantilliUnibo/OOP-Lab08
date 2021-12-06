@@ -34,6 +34,12 @@ public class Controller {
                                     + System.getProperty("file.separator")
                                     + "output.txt");
 
-
+    public void setCurrentFile(final File file) {
+        if (file.getParentFile().exists()) {
+            this.file = file;
+        } else {
+            throw new IllegalArgumentException("Not existing folder.");
+        }
+    }
 
 }
