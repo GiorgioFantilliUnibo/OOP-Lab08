@@ -33,7 +33,14 @@ public class Controller {
     private File file = new File(System.getProperty("user.home")
                                     + System.getProperty("file.separator")
                                     + "output.txt");
-
+    /**
+     * Set the {@link file} argument as the current file.
+     * 
+     * @param file
+     *          file to be set as current
+     * @throws IllegalArgumentException
+     *          if do not exist the entire path of the {@link file} argument
+     */
     public void setCurrentFile(final File file) {
         if (file.getParentFile().exists()) {
             this.file = file;
