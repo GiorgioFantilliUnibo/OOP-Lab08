@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 import it.unibo.oop.lab.iogui.BadIOGUI;
 
@@ -48,6 +49,9 @@ public final class SimpleGUI {
         final JButton save = new JButton("Save on file");
         canvas.add(save, BorderLayout.SOUTH);
         
+        final JTextArea text = new JTextArea();
+        canvas.add(text, BorderLayout.CENTER);
+
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         /*
