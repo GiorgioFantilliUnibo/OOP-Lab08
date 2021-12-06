@@ -27,6 +27,8 @@ public class MiniGUI {
 
     private static final String TITLE = "A very simple GUI application";
     private static final int PROPORTION = 5;
+    private static final String UTILITY_TEXT_FIELD = "Number = ";
+
     private final Random rng = new Random();
     private final JFrame frame = new JFrame(TITLE);
 
@@ -43,13 +45,13 @@ public class MiniGUI {
         final JPanel panel1 = new JPanel();
         panel1.setLayout(new BoxLayout(panel1, BoxLayout.LINE_AXIS));
         canvas.add(panel1, BorderLayout.CENTER);
-        final JButton write = new JButton("Print a random number on standard output");
+        final JButton write = new JButton("Print a random number on text field");
         panel1.add(write);
 
         /*
          * Ex 1.02
          */
-        final JTextField text = new JTextField();
+        final JTextField text = new JTextField("Click the button");
         canvas.add(text, BorderLayout.NORTH);
 
         frame.setContentPane(canvas);
@@ -61,7 +63,7 @@ public class MiniGUI {
         write.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                text.setText(Integer.toString(rng.nextInt()));
+                text.setText(UTILITY_TEXT_FIELD + Integer.toString(rng.nextInt()));
             }
         });
     }
