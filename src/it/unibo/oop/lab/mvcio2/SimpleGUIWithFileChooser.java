@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import it.unibo.oop.lab.mvcio.Controller;
 
@@ -63,7 +64,9 @@ public final class SimpleGUIWithFileChooser {
          * in the North of the main panel, put the text field in the center of the
          * new panel and put the button in the line_end of the new panel.
          */
-        
+        final JPanel northPanel = new JPanel();
+        northPanel.setLayout(new BorderLayout());
+        canvas.add(northPanel, BorderLayout.NORTH);
 
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
