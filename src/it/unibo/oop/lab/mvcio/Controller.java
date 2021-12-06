@@ -60,4 +60,13 @@ public class Controller {
     public void setCurrentFile(final String path) {
         this.setCurrentFile(new File(path));
     }
+
+    /**
+     * Return the current file.
+     * 
+     * @return the current file
+     */
+    public File getCurrentFile() {
+        return this.file;
+    }
 }
