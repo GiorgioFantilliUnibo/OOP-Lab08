@@ -44,9 +44,12 @@ public final class SimpleGUI {
     public SimpleGUI() {
         final JPanel canvas = new JPanel();
         canvas.setLayout(new BorderLayout());
-        
+
         final JButton save = new JButton("Save on file");
         canvas.add(save, BorderLayout.SOUTH);
+        
+        frame.setContentPane(canvas);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         /*
          * Make the frame half the resolution of the screen. This very method is
          * enough for a single screen setup. In case of multiple monitors, the
