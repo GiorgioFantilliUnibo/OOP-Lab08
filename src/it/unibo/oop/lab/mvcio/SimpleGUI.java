@@ -62,7 +62,7 @@ public final class SimpleGUI {
     }
 
     private void display() {
-        
+        frame.setVisible(true);
     }
 
     /**
