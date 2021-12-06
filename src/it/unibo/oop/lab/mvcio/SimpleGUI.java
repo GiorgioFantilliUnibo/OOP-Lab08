@@ -5,6 +5,8 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
+import it.unibo.oop.lab.iogui.BadIOGUI;
+
 /**
  * A very simple program using a graphical interface.
  * 
@@ -57,6 +59,17 @@ public final class SimpleGUI {
          * on screen. Results may vary, but it is generally the best choice.
          */
         frame.setLocationByPlatform(true);
+    }
+
+    private void display() {
+        
+    }
+
+    /**
+     * @param args ignored
+     */
+    public static void main(final String... args) {
+       new SimpleGUI().display();
     }
 
 }
