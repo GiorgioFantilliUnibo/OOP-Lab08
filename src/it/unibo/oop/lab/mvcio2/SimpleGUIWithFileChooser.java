@@ -1,21 +1,27 @@
 package it.unibo.oop.lab.mvcio2;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+
+import it.unibo.oop.lab.mvcio.Controller;
+
 /**
  * A very simple program using a graphical interface.
  * 
  */
 public final class SimpleGUIWithFileChooser {
 
-    /*
-     * TODO: Starting from the application in mvcio:
-     * 
-     * 1) Add a JTextField and a button "Browse..." on the upper part of the
-     * graphical interface.
-     * Suggestion: use a second JPanel with a second BorderLayout, put the panel
-     * in the North of the main panel, put the text field in the center of the
-     * new panel and put the button in the line_end of the new panel.
-     * 
-     * 2) The JTextField should be non modifiable. And, should display the
+    /* 2) The JTextField should be non modifiable. And, should display the
      * current selected file.
      * 
      * 3) On press, the button should open a JFileChooser. The program should
@@ -31,5 +37,83 @@ public final class SimpleGUIWithFileChooser {
      * update the UI: in this example the UI knows when should be updated, so
      * try to keep things separated.
      */
+
+    private final JFrame frame = new JFrame();
+    private final Controller controller = new Controller();
+
+    /**
+     * builds a new {@link SimpleGUI}.
+     */
+    public SimpleGUIWithFileChooser() {
+        final JPanel canvas = new JPanel();
+        canvas.setLayout(new BorderLayout());
+
+        final JButton save = new JButton("Save on file");
+        canvas.add(save, BorderLayout.SOUTH);
+
+        final JTextArea text = new JTextArea();
+        canvas.add(text, BorderLayout.CENTER);
+
+        /*
+         * Starting from the application in mvcio:
+         * 
+         * 1) Add a JTextField and a button "Browse..." on the upper part of the
+         * graphical interface.
+         * Suggestion: use a second JPanel with a second BorderLayout, put the panel
+         * in the North of the main panel, put the text field in the center of the
+         * new panel and put the button in the line_end of the new panel.
+         */
+        
+
+        frame.setContentPane(canvas);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        /*
+         * Handlers
+         */
+        save.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                try {
+                    controller.saveLine(text.getText());
+                } catch (IOException e1) {
+                    JOptionPane.showMessageDialog(frame, e1, "Error", JOptionPane.ERROR_MESSAGE);
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        /*
+         * Make the frame half the resolution of the screen. This very method is
+         * enough for a single screen setup. In case of multiple monitors, the
+         * primary is selected.
+         * 
+         * In order to deal coherently with multimonitor setups, other
+         * facilities exist (see the Java documentation about this issue). It is
+         * MUCH better than manually specify the size of a window in pixel: it
+         * takes into account the current resolution.
+         */
+        final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+        final int sw = (int) screen.getWidth();
+        final int sh = (int) screen.getHeight();
+        frame.setSize(sw / 2, sh / 2);
+        /*
+         * Instead of appearing at (0,0), upper left corner of the screen, this
+         * flag makes the OS window manager take care of the default positioning
+         * on screen. Results may vary, but it is generally the best choice.
+         */
+        frame.setLocationByPlatform(true);
+    }
+
+    private void display() {
+        frame.setVisible(true);
+    }
+
+    /**
+     * @param args ignored
+     */
+    public static void main(final String... args) {
+       new SimpleGUIWithFileChooser().display();
+    }
 
 }
