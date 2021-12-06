@@ -72,7 +72,7 @@ public final class SimpleGUIWithFileChooser {
         northPanel.add(display, BorderLayout.CENTER);
 
         final JButton browse = new JButton("Browse...");
-        northPanel.add(browse, BorderLayout.SOUTH);
+        northPanel.add(browse, BorderLayout.LINE_END);
 
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
