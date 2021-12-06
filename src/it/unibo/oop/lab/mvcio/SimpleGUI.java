@@ -3,9 +3,15 @@ package it.unibo.oop.lab.mvcio;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintStream;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
@@ -48,12 +54,28 @@ public final class SimpleGUI {
 
         final JButton save = new JButton("Save on file");
         canvas.add(save, BorderLayout.SOUTH);
-        
+
         final JTextArea text = new JTextArea();
         canvas.add(text, BorderLayout.CENTER);
 
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        /*
+         * Handlers
+         */
+        save.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                try {
+                    controller.saveLine(text.getText());
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(frame, e, "Error", JOptionPane.ERROR_MESSAGE);
+                    e.printStackTrace();
+                }
+            }
+        });
+
         /*
          * Make the frame half the resolution of the screen. This very method is
          * enough for a single screen setup. In case of multiple monitors, the
