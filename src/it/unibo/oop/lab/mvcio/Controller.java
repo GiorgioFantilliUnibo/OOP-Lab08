@@ -1,6 +1,8 @@
 package it.unibo.oop.lab.mvcio;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintStream;
 
 /**
  * 
@@ -77,5 +79,19 @@ public class Controller {
      */
     public String getCurrentFilePath() {
         return this.file.getPath();
+    }
+
+    /**
+     * Save the string {@link s} in the current file.
+     * 
+     * @param s
+     *          string to be saved in the file
+     * @throws IOException
+     *          if writing to file fails
+     */
+    public void saveLine(final String s) throws IOException {
+        try (PrintStream ps = new PrintStream(this.file)) {
+            ps.println(s);
+        }
     }
 }
