@@ -1,9 +1,12 @@
 package it.unibo.oop.lab.mvcio;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import it.unibo.oop.lab.iogui.BadIOGUI;
 
@@ -39,6 +42,11 @@ public final class SimpleGUI {
      * builds a new {@link SimpleGUI}.
      */
     public SimpleGUI() {
+        final JPanel canvas = new JPanel();
+        canvas.setLayout(new BorderLayout());
+        
+        final JButton save = new JButton("Save on file");
+        canvas.add(save, BorderLayout.SOUTH);
         /*
          * Make the frame half the resolution of the screen. This very method is
          * enough for a single screen setup. In case of multiple monitors, the
