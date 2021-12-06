@@ -69,6 +69,7 @@ public final class SimpleGUIWithFileChooser {
         canvas.add(northPanel, BorderLayout.NORTH);
 
         final JTextField display = new JTextField();
+        display.setEditable(false);
         northPanel.add(display, BorderLayout.CENTER);
 
         final JButton browse = new JButton("Browse...");
