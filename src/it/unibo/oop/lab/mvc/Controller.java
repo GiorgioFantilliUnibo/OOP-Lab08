@@ -34,4 +34,27 @@ public interface Controller {
      *          if argument {@link s} is null value
      */
     void setNextString(String s);
+
+    /**
+     * Get the next string to print.
+     * 
+     * @return the next string to print
+     */
+    String getNextString();
+
+    /**
+     * Get the the history of the printed strings.
+     * 
+     * @return the history of the printed strings 
+     *          in form of a List of Strings
+     */
+    String getPrintHistory();
+
+    /**
+     * Print the current string.
+     * 
+     * @throw IllegalStateException
+     *          if the current string is unset
+     */
+    void print();
 }
