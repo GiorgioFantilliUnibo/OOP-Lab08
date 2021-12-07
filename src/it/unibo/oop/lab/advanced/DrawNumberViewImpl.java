@@ -91,7 +91,7 @@ public final class DrawNumberViewImpl implements DrawNumberView {
 
     @Override
     public void numberIncorrect() {
-        JOptionPane.showMessageDialog(frame, "Incorrect Number.. try again", "Incorrect Number",
+        JOptionPane.showMessageDialog(frame, "Number out of bound", "Incorrect Number",
                 JOptionPane.ERROR_MESSAGE);
     }
 
