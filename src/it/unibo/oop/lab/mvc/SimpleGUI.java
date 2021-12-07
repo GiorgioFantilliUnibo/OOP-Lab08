@@ -5,6 +5,9 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
+import it.unibo.oop.lab.mvcio.Controller;
+import it.unibo.oop.lab.mvcio2.SimpleGUIWithFileChooser;
+
 /**
  * A very simple program using a graphical interface.
  * 
@@ -12,6 +15,7 @@ import javax.swing.JFrame;
 public final class SimpleGUI {
 
     private final JFrame frame = new JFrame();
+    private final ControllerImpl controller = new ControllerImpl();
 
     /*
      * Once the Controller is done, implement this class in such a way that:
@@ -61,5 +65,17 @@ public final class SimpleGUI {
          */
         frame.setLocationByPlatform(true);
     }
+
+    private void display() {
+        frame.setVisible(true);
+    }
+
+    /**
+     * @param args ignored
+     */
+    public static void main(final String... args) {
+       new SimpleGUI().display();
+    }
+
 
 }
