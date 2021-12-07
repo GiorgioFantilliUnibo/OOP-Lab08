@@ -57,8 +57,7 @@ public class ConfigurationImpl implements Configuration {
      */
     @Override
     public boolean isConsistent() {
-        // TODO Auto-generated method stub
-        return false;
+        return this.isConsistent;
     }
 
     private void setConsistency() {
