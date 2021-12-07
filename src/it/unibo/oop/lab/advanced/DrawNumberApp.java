@@ -17,7 +17,7 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
      *          path of the configuration file as string
      */
     public DrawNumberApp(final String configFilePath) {
-        this.model = new DrawNumberImpl(MIN, MAX, ATTEMPTS);
+        this.model = new DrawNumberImpl(new Configuration(configFilePath));
         this.view = new DrawNumberViewImpl();
         this.view.setObserver(this);
         this.view.start();
