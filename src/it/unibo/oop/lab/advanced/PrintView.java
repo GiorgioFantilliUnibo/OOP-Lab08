@@ -65,7 +65,7 @@ public class PrintView implements DrawNumberView {
         case YOURS_HIGH:
         case YOURS_LOW:
         case YOU_WON:
-            this.stream.print(res.getDescription());
+            this.stream.print("\n" + res.getDescription());
             break;
         default:
             this.stream.print("\nUnexpected result: " + res);
