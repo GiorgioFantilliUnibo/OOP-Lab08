@@ -31,10 +31,6 @@ public class ConfigurationImpl implements Configuration {
         this.setConsistency();
     }
 
-    private void setConsistency() {
-        this.isConsistent = this.attempts > 0 && this.min < this.max;
-    }
-
     /**
      * {@inheritDoc}
      */
@@ -63,6 +59,10 @@ public class ConfigurationImpl implements Configuration {
     public boolean isConsistent() {
         // TODO Auto-generated method stub
         return false;
+    }
+
+    private void setConsistency() {
+        this.isConsistent = this.attempts > 0 && this.min < this.max;
     }
 
 }
