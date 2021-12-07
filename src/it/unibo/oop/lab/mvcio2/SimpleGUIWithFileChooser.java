@@ -5,9 +5,11 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -96,12 +98,19 @@ public final class SimpleGUIWithFileChooser {
         browse.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                
-                try {
-                    controller.saveLine(text.getText());
-                } catch (IOException e1) {
-                    JOptionPane.showMessageDialog(frame, e1, "Error", JOptionPane.ERROR_MESSAGE);
-                    e1.printStackTrace();
+                final JFileChooser fileChooser = new JFileChooser();
+
+                switch (fileChooser.showSaveDialog(canvas)) {
+                    case JFileChooser.APPROVE_OPTION:
+                        final File chosenFile = fileChooser.getSelectedFile();
+                        controller.setCurrentFile(chosenFile);
+                        display.setText(chosenFile.getPath());
+                        break;
+                    case JFileChooser.CANCEL_OPTION:
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(frame, fileChooser, "Error", JOptionPane.ERROR_MESSAGE);
+                        break;
                 }
             }
         });
