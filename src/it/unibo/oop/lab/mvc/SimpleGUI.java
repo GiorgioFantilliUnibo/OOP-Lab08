@@ -1,22 +1,25 @@
 package it.unibo.oop.lab.mvc;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import it.unibo.oop.lab.mvcio.Controller;
-import it.unibo.oop.lab.mvcio2.SimpleGUIWithFileChooser;
 
 /**
  * A very simple program using a graphical interface.
  * 
  */
 public final class SimpleGUI {
+
+    private static final String PRINT = "Print";
+    private static final String HISTORY = "Show history";
 
     private final JFrame frame = new JFrame();
     private final ControllerImpl controller = new ControllerImpl();
@@ -46,6 +49,9 @@ public final class SimpleGUI {
      * builds a new {@link SimpleGUI}.
      */
     public SimpleGUI() {
+        /*
+         * main panel
+         */
         final JPanel canvas = new JPanel();
         canvas.setLayout(new BorderLayout());
 
@@ -54,6 +60,19 @@ public final class SimpleGUI {
 
         final JTextArea text = new JTextArea();
         canvas.add(text, BorderLayout.CENTER);
+
+        /*
+         * south panel
+         */
+        final JPanel southPanel = new JPanel();
+        southPanel.setLayout(new GridLayout(1, 2));
+        canvas.add(southPanel, BorderLayout.SOUTH);
+
+        final JButton printBTN = new JButton(PRINT);
+        southPanel.add(printBTN);
+
+        final JButton historyBTN = new JButton(HISTORY);
+        southPanel.add(historyBTN);
 
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
