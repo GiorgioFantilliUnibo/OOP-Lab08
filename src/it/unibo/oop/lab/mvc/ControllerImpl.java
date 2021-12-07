@@ -2,6 +2,7 @@ package it.unibo.oop.lab.mvc;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * {@inheritDoc}
@@ -16,8 +17,7 @@ public class ControllerImpl implements Controller {
      */
     @Override
     public void setNextString(final String s) {
-        // TODO Auto-generated method stub
-
+        this.currentString = Objects.requireNonNull(s, "The string to set can not be null");
     }
 
     /**
@@ -25,17 +25,15 @@ public class ControllerImpl implements Controller {
      */
     @Override
     public String getNextString() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.currentString;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String getPrintHistory() {
-        // TODO Auto-generated method stub
-        return null;
+    public List<String> getPrintHistory() {
+        return new LinkedList<String>(this.history);
     }
 
     /**
@@ -43,8 +41,12 @@ public class ControllerImpl implements Controller {
      */
     @Override
     public void print() {
-        // TODO Auto-generated method stub
-
+        if (this.currentString != null) {
+            this.history.add(this.currentString);
+            System.out.println(this.currentString);
+        } else {
+            throw new IllegalStateException("A new next string must be set");
+        }
     }
 
 }
