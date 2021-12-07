@@ -25,4 +25,13 @@ public interface Controller {
      * 
      */
 
+    /**
+     * Set the next string to print.
+     * 
+     * @param s
+     *          next string to print
+     * @throws NullPointerException
+     *          if argument {@link s} is null value
+     */
+    void setNextString(String s);
 }
