@@ -1,9 +1,13 @@
 package it.unibo.oop.lab.mvc;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import it.unibo.oop.lab.mvcio.Controller;
 import it.unibo.oop.lab.mvcio2.SimpleGUIWithFileChooser;
@@ -42,7 +46,17 @@ public final class SimpleGUI {
      * builds a new {@link SimpleGUI}.
      */
     public SimpleGUI() {
+        final JPanel canvas = new JPanel();
+        canvas.setLayout(new BorderLayout());
 
+        final JTextField display = new JTextField();
+        canvas.add(display, BorderLayout.NORTH);
+
+        final JTextArea text = new JTextArea();
+        canvas.add(text, BorderLayout.CENTER);
+
+        frame.setContentPane(canvas);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         /*
          * Make the frame half the resolution of the screen. This very method is
          * enough for a single screen setup. In case of multiple monitors, the
