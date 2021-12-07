@@ -12,7 +12,7 @@ public class ConfigurationImpl implements Configuration {
     private final int min;
     private final int max;
     private final int attempts;
-    private boolean isConsistent = false;
+    private boolean isConsistent;
 
     /**
      * Build a new {@link ConfigurationImpl}.
