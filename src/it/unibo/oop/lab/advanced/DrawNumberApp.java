@@ -1,6 +1,7 @@
 package it.unibo.oop.lab.advanced;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -21,42 +22,21 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
     public DrawNumberApp(final String configFilePath) {
         Configuration configuration;
         final InputStream inputStream = ClassLoader.getSystemResourceAsStream(configFilePath);
-        
+
+        this.view = new DrawNumberViewImpl();
+
         if (inputStream == null) {
-            configuration = new Configuration() {
-
-                @Override
-                public boolean isConsistent() {
-                    return false;
-                }
-
-                @Override
-                public int getMin() {
-                    return ConfigurationImpl.DEFAULT_MIN;
-                }
-
-                @Override
-                public int getMax() {
-                    return ConfigurationImpl.DEFAULT_MAX;
-                }
-
-                @Override
-                public int getAttempts() {
-                    return ConfigurationImpl.DEFAULT_ATTEMPTS;
-                }
-                
-            };
+            configuration = ConfigurationImpl.getDefaultConfiguration();
         } else {
             try (BufferedReader readFile = new BufferedReader(
-                    new InputStreamReader())) {
-
-            while ((String line = readFile.readLine()) != null)
+                                           new InputStreamReader(inputStream))) {
+                
+            } catch (IOException e) {
+                view.displayError(e.getMessage());
             }
         }
-        
-        
-        this.model = new DrawNumberImpl();
-        this.view = new DrawNumberViewImpl();
+
+        this.model = new DrawNumberImpl(configuration);
         this.view.setObserver(this);
         this.view.start();
     }
