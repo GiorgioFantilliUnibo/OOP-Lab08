@@ -50,7 +50,7 @@ public class PrintView implements DrawNumberView {
      */
     @Override
     public void numberIncorrect() {
-        this.stream.print("Number out of bound");
+        this.stream.print("\nNumber out of bound");
     }
 
     /**
@@ -68,7 +68,7 @@ public class PrintView implements DrawNumberView {
             this.stream.print(res.getDescription());
             break;
         default:
-            this.stream.print("Unexpected result: " + res);
+            this.stream.print("\nUnexpected result: " + res);
             break;
         }
     }
@@ -78,7 +78,7 @@ public class PrintView implements DrawNumberView {
      */
     @Override
     public void limitsReached() {
-        this.stream.print("You lost! Reached the maximum number of attempts.");
+        this.stream.print("\nYou lost! Reached the maximum number of attempts.");
     }
 
     /**
