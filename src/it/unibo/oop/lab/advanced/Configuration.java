@@ -11,5 +11,19 @@ public interface Configuration {
      * @return true if the loaded configuration is consistent, false otherwise
      */
     boolean isConsistent();
-    
+
+    /**
+     * @return the lower value assumed by the number.
+     */
+    int getMin();
+
+    /**
+     * @return the greater value assumed by the number.
+     */
+    int getMax();
+
+    /**
+     * @return the maximum number of possible attempts
+     */
+    int getAttempts();
 }
