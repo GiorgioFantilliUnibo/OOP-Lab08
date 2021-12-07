@@ -35,21 +35,33 @@ public class ConfigurationImpl implements Configuration {
      * {@inheritDoc}
      */
     public int getMin() {
-        return min;
+        if (this.isConsistent) {
+            return min;
+        } else {
+            return DEFAULT_MIN;
+        }
     }
 
     /**
      * {@inheritDoc}
      */
     public int getMax() {
-        return max;
+        if (this.isConsistent) {
+            return max;
+        } else {
+            return DEFAULT_MAX;
+        }
     }
 
     /**
      * {@inheritDoc}
      */
     public int getAttempts() {
-        return attempts;
+        if (this.isConsistent) {
+            return attempts;
+        } else {
+            return DEFAULT_ATTEMPTS;
+        }
     }
 
     /**
