@@ -1,12 +1,14 @@
 package it.unibo.oop.lab.advanced;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 /**
  */
 public final class DrawNumberApp implements DrawNumberViewObserver {
 
-    private static final int MIN = 0;
-    private static final int MAX = 100;
-    private static final int ATTEMPTS = 10;
+    
     private final DrawNumber model;
     private final DrawNumberView view;
 
@@ -17,7 +19,43 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
      *          path of the configuration file as string
      */
     public DrawNumberApp(final String configFilePath) {
-        this.model = new DrawNumberImpl(new Configuration(configFilePath));
+        Configuration configuration;
+        final InputStream inputStream = ClassLoader.getSystemResourceAsStream(configFilePath);
+        
+        if (inputStream == null) {
+            configuration = new Configuration() {
+
+                @Override
+                public boolean isConsistent() {
+                    return false;
+                }
+
+                @Override
+                public int getMin() {
+                    return ConfigurationImpl.DEFAULT_MIN;
+                }
+
+                @Override
+                public int getMax() {
+                    return ConfigurationImpl.DEFAULT_MAX;
+                }
+
+                @Override
+                public int getAttempts() {
+                    return ConfigurationImpl.DEFAULT_ATTEMPTS;
+                }
+                
+            };
+        } else {
+            try (BufferedReader readFile = new BufferedReader(
+                    new InputStreamReader())) {
+
+            while ((String line = readFile.readLine()) != null)
+            }
+        }
+        
+        
+        this.model = new DrawNumberImpl();
         this.view = new DrawNumberViewImpl();
         this.view.setObserver(this);
         this.view.start();
@@ -50,7 +88,7 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
      *            ignored
      */
     public static void main(final String... args) {
-        new DrawNumberApp();
+        new DrawNumberApp("contig.yml");
     }
 
 }
