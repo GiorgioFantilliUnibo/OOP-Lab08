@@ -11,9 +11,12 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
     private final DrawNumberView view;
 
     /**
+     * Build a new {@link DrawNumberApp}.
      * 
+     * @param configFilePath
+     *          path of the configuration file as string
      */
-    public DrawNumberApp() {
+    public DrawNumberApp(final String configFilePath) {
         this.model = new DrawNumberImpl(MIN, MAX, ATTEMPTS);
         this.view = new DrawNumberViewImpl();
         this.view.setObserver(this);
