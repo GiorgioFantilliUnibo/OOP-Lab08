@@ -26,4 +26,33 @@ public interface Configuration {
      * @return the maximum number of possible attempts
      */
     int getAttempts();
+
+    /**
+     * @return a {@link Configuration} instance with default value set
+     */
+    static Configuration getDefaultConfiguration() {
+        return new Configuration() {
+
+            @Override
+            public boolean isConsistent() {
+                return false;
+            }
+
+            @Override
+            public int getMin() {
+                return ConfigurationImpl.DEFAULT_MIN;
+            }
+
+            @Override
+            public int getMax() {
+                return ConfigurationImpl.DEFAULT_MAX;
+            }
+
+            @Override
+            public int getAttempts() {
+                return ConfigurationImpl.DEFAULT_ATTEMPTS;
+            }
+
+        };
+    }
 }
