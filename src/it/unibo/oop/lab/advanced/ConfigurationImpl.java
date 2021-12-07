@@ -5,9 +5,20 @@ package it.unibo.oop.lab.advanced;
  */
 public class ConfigurationImpl implements Configuration {
 
-    private static final int DEFAULT_MIN = 0;
-    private static final int DEFAULT_MAX = 100;
-    private static final int DEFAULT_ATTEMPTS = 10;
+    /**
+     * Default lower value assumed by the number.
+     */
+    public static final int DEFAULT_MIN = 0;
+
+    /**
+     * Default greater value assumed by the number.
+     */
+    public static final int DEFAULT_MAX = 100;
+
+    /**
+     * Default maximum number of possible attempts.
+     */
+    public static final int DEFAULT_ATTEMPTS = 10;
 
     private final int min;
     private final int max;
