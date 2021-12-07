@@ -19,6 +19,7 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
      * @param configFilePath
      *          path of the configuration file as string
      */
+    @SuppressWarnings({ "PMD.AvoidCatchingGenericException", "PMD.AvoidCatchingNPE" })
     public DrawNumberApp(final String configFilePath) {
         Configuration configuration;
         final InputStream inputStream = ClassLoader.getSystemResourceAsStream(configFilePath);
@@ -56,7 +57,9 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
                 }
                 configuration = new ConfigurationImpl(minRead, maxRead, attemptsRead);
 
-            } catch (IOException | NumberFormatException e) {
+            } catch (IOException
+                     | NumberFormatException
+                     | NullPointerException e) {
                 configuration = Configuration.getDefaultConfiguration();
                 displayUsingDefaultConfig("Illegal configuration file formatting.\n", configuration);
             }
