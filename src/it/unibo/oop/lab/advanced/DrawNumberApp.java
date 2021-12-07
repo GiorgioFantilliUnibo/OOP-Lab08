@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  */
@@ -11,20 +13,25 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
 
     private static final int FILE_LINE = 3;
     private final DrawNumber model;
-    private final DrawNumberView view;
+    private final List<DrawNumberView> views;
 
     /**
      * Build a new {@link DrawNumberApp}.
      * 
      * @param configFilePath
      *          path of the configuration file as string
+     * @param views
+     *          array of the views
      */
-    @SuppressWarnings({ "PMD.AvoidCatchingGenericException", "PMD.AvoidCatchingNPE" })
-    public DrawNumberApp(final String configFilePath) {
+    public DrawNumberApp(final String configFilePath, final DrawNumberView... views) {
         Configuration configuration;
         final InputStream inputStream = ClassLoader.getSystemResourceAsStream(configFilePath);
 
-        this.view = new DrawNumberViewImpl();
+        this.views = Arrays.asList(Arrays.copyOf(views, views.length));
+        for (final DrawNumberView view : views) {
+            view.setObserver(this);
+            view.start();
+        }
 
         if (inputStream == null) {
             configuration = Configuration.getDefaultConfiguration();
@@ -66,26 +73,32 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
         }
 
         this.model = new DrawNumberImpl(configuration);
-        this.view.setObserver(this);
-        this.view.start();
     }
 
     private void displayUsingDefaultConfig(final String message, final Configuration configuration) {
-        view.displayError(message + "Using default configuration:"
+        for (final DrawNumberView view : views) {
+            view.displayError(message + "Using default configuration:"
                 + "\nmin: " + configuration.getMin()
                 + "\nmax: " + configuration.getMax()
                 + "\nattempts: " + configuration.getAttempts());
+        }
     }
 
     @Override
     public void newAttempt(final int n) {
         try {
             final DrawResult result = model.attempt(n);
-            this.view.result(result);
+            for (final DrawNumberView view : views) {
+                view.result(result);
+            }
         } catch (IllegalArgumentException e) {
-            this.view.numberIncorrect();
+            for (final DrawNumberView view : views) {
+                view.numberIncorrect();
+            }
         } catch (AttemptsLimitReachedException e) {
-            view.limitsReached();
+            for (final DrawNumberView view : views) {
+                view.limitsReached();
+            }
         }
     }
 
@@ -104,7 +117,7 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
      *            ignored
      */
     public static void main(final String... args) {
-        new DrawNumberApp("config.yml");
+        new DrawNumberApp("config.yml", new DrawNumberViewImpl());
     }
 
 }
