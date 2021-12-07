@@ -12,7 +12,7 @@ public class ConfigurationImpl implements Configuration {
     private final int min;
     private final int max;
     private final int attempts;
-    private boolean isConsistent;
+    private boolean isConsistent = false;
 
     /**
      * Build a new {@link ConfigurationImpl}.
@@ -32,7 +32,28 @@ public class ConfigurationImpl implements Configuration {
     }
 
     private void setConsistency() {
-        this.isConsistent = (this.attempts > 0) && (this.min < this.max);
+        this.isConsistent = this.attempts > 0 && this.min < this.max;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public int getMin() {
+        return min;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public int getMax() {
+        return max;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public int getAttempts() {
+        return attempts;
     }
 
     /**
