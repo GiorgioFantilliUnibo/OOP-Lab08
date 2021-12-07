@@ -6,15 +6,13 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import java.awt.Color;
 
 
 /**
@@ -61,6 +59,7 @@ public final class SimpleGUI {
         canvas.setLayout(new BorderLayout());
 
         final JTextField text = new JTextField();
+        text.setBackground(Color.lightGray);
         canvas.add(text, BorderLayout.NORTH);
 
         final JTextArea display = new JTextArea();
@@ -92,7 +91,19 @@ public final class SimpleGUI {
                 SimpleGUI.this.controller.print();
             }
         });
-        
+
+        historyBTN.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                String text = new String();
+                final List<String> history = SimpleGUI.this.controller.getPrintHistory();
+
+                for (final String s: history) {
+                    text = text + s + "\n";
+                }
+                display.setText(text);
+            }
+        });
         /*
          * Make the frame half the resolution of the screen. This very method is
          * enough for a single screen setup. In case of multiple monitors, the
