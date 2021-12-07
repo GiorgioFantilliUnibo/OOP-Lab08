@@ -4,8 +4,13 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
@@ -55,11 +60,11 @@ public final class SimpleGUI {
         final JPanel canvas = new JPanel();
         canvas.setLayout(new BorderLayout());
 
-        final JTextField display = new JTextField();
-        canvas.add(display, BorderLayout.NORTH);
+        final JTextField text = new JTextField();
+        canvas.add(text, BorderLayout.NORTH);
 
-        final JTextArea text = new JTextArea();
-        canvas.add(text, BorderLayout.CENTER);
+        final JTextArea display = new JTextArea();
+        canvas.add(display, BorderLayout.CENTER);
 
         /*
          * south panel
@@ -76,6 +81,18 @@ public final class SimpleGUI {
 
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        /*
+         * handlers
+         */
+        printBTN.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                SimpleGUI.this.controller.setNextString(text.getText());
+                SimpleGUI.this.controller.print();
+            }
+        });
+        
         /*
          * Make the frame half the resolution of the screen. This very method is
          * enough for a single screen setup. In case of multiple monitors, the
