@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
  */
 public final class DrawNumberApp implements DrawNumberViewObserver {
 
-    
+    private static final int FILE_LINE = 3;
     private final DrawNumber model;
     private final DrawNumberView view;
 
@@ -26,19 +26,52 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
         this.view = new DrawNumberViewImpl();
 
         if (inputStream == null) {
-            configuration = ConfigurationImpl.getDefaultConfiguration();
+            configuration = Configuration.getDefaultConfiguration();
+            displayUsingDefaultConfig("Error accessing the configuration file!!\n", configuration);
         } else {
             try (BufferedReader readFile = new BufferedReader(
                                            new InputStreamReader(inputStream))) {
-                
-            } catch (IOException e) {
-                view.displayError(e.getMessage());
+                int minRead = ConfigurationImpl.DEFAULT_MIN;
+                int maxRead = ConfigurationImpl.DEFAULT_MAX;
+                int attemptsRead = ConfigurationImpl.DEFAULT_ATTEMPTS;
+
+                for (int i = 0; i < FILE_LINE; i++) {
+                    final String[] formatLine = readFile.readLine().split(":");
+
+                    if (formatLine.length == 2) {
+                        final int value = Integer.parseInt(formatLine[1].trim());
+                        if (formatLine[0].contains("min")) {
+                            minRead = value;
+                        } else if (formatLine[0].contains("max")) {
+                            maxRead = value;
+                        } else if (formatLine[0].contains("attempts")) {
+                            attemptsRead = value;
+                        } else {
+                            throw new IOException();
+                        }
+                    } else {
+                        throw new IOException();
+                    }
+
+                }
+                configuration = new ConfigurationImpl(minRead, maxRead, attemptsRead);
+
+            } catch (IOException | NumberFormatException e) {
+                configuration = Configuration.getDefaultConfiguration();
+                displayUsingDefaultConfig("Illegal configuration file formatting.\n", configuration);
             }
         }
 
         this.model = new DrawNumberImpl(configuration);
         this.view.setObserver(this);
         this.view.start();
+    }
+
+    private void displayUsingDefaultConfig(final String message, final Configuration configuration) {
+        view.displayError(message + "Using default configuration:"
+                + "\nmin: " + configuration.getMin()
+                + "\nmax: " + configuration.getMax()
+                + "\nattempts: " + configuration.getAttempts());
     }
 
     @Override
@@ -68,7 +101,7 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
      *            ignored
      */
     public static void main(final String... args) {
-        new DrawNumberApp("contig.yml");
+        new DrawNumberApp("config.yml");
     }
 
 }
