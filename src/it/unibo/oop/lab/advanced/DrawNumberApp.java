@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * Controller
  */
 public final class DrawNumberApp implements DrawNumberViewObserver {
 
