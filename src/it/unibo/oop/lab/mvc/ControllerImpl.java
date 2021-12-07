@@ -1,9 +1,15 @@
 package it.unibo.oop.lab.mvc;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * {@inheritDoc}
  */
 public class ControllerImpl implements Controller {
+
+    private String currentString;
+    private final List<String> history = new LinkedList();
 
     /**
      * {@inheritDoc}
