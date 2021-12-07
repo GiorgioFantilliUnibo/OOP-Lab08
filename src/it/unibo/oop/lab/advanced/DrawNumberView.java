@@ -16,7 +16,7 @@ public interface DrawNumberView {
     void start();
 
     /**
-     * Tells the user that the inserted number is not correct.
+     * Tells the user that the inserted number is out of bound.
      */
     void numberIncorrect();
 
