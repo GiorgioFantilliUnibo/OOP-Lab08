@@ -64,7 +64,11 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
                     }
 
                 }
+
                 configuration = new ConfigurationImpl(minRead, maxRead, attemptsRead);
+                if (!configuration.isConsistent()) {
+                    displayUsingDefaultConfig("Configuration loaded value are not consistent.\n", configuration);
+                }
 
             } catch (IOException
                      | NumberFormatException
@@ -80,9 +84,9 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
     private void displayUsingDefaultConfig(final String message, final Configuration configuration) {
         for (final DrawNumberView view : views) {
             view.displayError(message + "Using default configuration:"
-                + "\nmin: " + configuration.getMin()
-                + "\nmax: " + configuration.getMax()
-                + "\nattempts: " + configuration.getAttempts());
+                + "\n- min: " + configuration.getMin()
+                + "\n- max: " + configuration.getMax()
+                + "\n- attempts: " + configuration.getAttempts());
         }
     }
 
